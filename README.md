@@ -1,87 +1,75 @@
+[update-readmes]   Mode: rewrite — migrating to template structure...
 # ubuntu-26.04-desktop-bootc
 
-Ubuntu 26.04 LTS "Resolute Raccoon" **desktop** bootc image — GNOME 50,
-kernel 7.0, ZFS support, Plymouth, and Flatpak/Flathub.
+[![Built with Ona](https://ona.com/build-with-ona.svg)](https://app.ona.com/#https://github.com/Interested-Deving-1896/ubuntu-26.04-desktop-bootc)
 
-Derives from the minimal bootc base. Designed to be installed from the
-companion live ISO ([tuna-os/ubuntu-26.04-iso](https://github.com/tuna-os/ubuntu-26.04-iso))
-via fisherman, with ZFS or btrfs as the target filesystem.
+<!-- AI:start:what-it-does -->
+_Description pending._
+<!-- AI:end:what-it-does -->
 
-```
-ghcr.io/ubuntu-bootc/ubuntu-26.04-desktop-bootc:latest
-```
+## Architecture
 
-## Image hierarchy
+<!-- AI:start:architecture -->
+_Architecture documentation pending._
+<!-- AI:end:architecture -->
 
-```
-docker.io/library/ubuntu:26.04
-└── ghcr.io/ubuntu-bootc/ubuntu-26.04-bootc
-    ├── ghcr.io/ubuntu-bootc/ubuntu-26.04-server-bootc
-    └── ghcr.io/ubuntu-bootc/ubuntu-26.04-desktop-bootc   ← you are here
-```
+## Install
 
-| Image | Description |
-|-------|-------------|
-| [ubuntu-26.04-bootc](https://github.com/ubuntu-bootc/ubuntu-26.04-bootc) | Minimal base — kernel, bootc, dracut, ssh, podman |
-| [ubuntu-26.04-server-bootc](https://github.com/ubuntu-bootc/ubuntu-26.04-server-bootc) | Server layer — cloud-init, netplan, ufw, snapd, chrony |
-| **[ubuntu-26.04-desktop-bootc](https://github.com/ubuntu-bootc/ubuntu-26.04-desktop-bootc)** | This image — GNOME 50 desktop layer |
-
-## What this adds over the base
-
-| Component | Package |
-|-----------|---------|
-| Desktop | `ubuntu-desktop-minimal` (GNOME 50) |
-| Splash | `plymouth` + `plymouth-themes` |
-| Apps | `flatpak` + Flathub remote (`/etc/flatpak/remotes.d/`) |
-| ZFS root | `zfsutils-linux`, `zfs-dracut`, `linux-modules-zfs-generic`, `zfs-zed` |
-| First-run OOBE | `gnome-initial-setup` |
-| Initramfs | Rebuilt with `bootc + plymouth + zfs` dracut modules |
-
-Everything from [ubuntu-26.04-bootc](https://github.com/ubuntu-bootc/ubuntu-26.04-bootc)
-is also present: kernel 7.0, systemd-boot, openssh-server, podman, skopeo, sssd, sudo.
-
-## Building locally
+<!-- Add installation instructions here. This section is yours — the AI will not modify it. -->
 
 ```bash
-just build
+git clone https://github.com/Interested-Deving-1896/ubuntu-26.04-desktop-bootc.git
+cd ubuntu-26.04-desktop-bootc
 ```
 
-## Create a bootable disk image (for testing)
+## Usage
 
-```bash
-just generate-bootable-image   # creates base_dir/bootable.raw (20 GB)
-just test-boot                 # headless QEMU smoke test
-just boot-vm                   # interactive QEMU with GTK display
-```
+<!-- Add usage examples here. This section is yours — the AI will not modify it. -->
 
-## OTA updates on an installed system
+## Configuration
 
-```bash
-sudo bootc upgrade
-```
+<!-- Document configuration options here. This section is yours — the AI will not modify it. -->
 
-## Related projects
+## CI
 
-| Repo | Role |
-|------|------|
-| [tuna-os/ubuntu-26.04-iso](https://github.com/tuna-os/ubuntu-26.04-iso) | Live ISO that installs this image |
-| [tuna-os/fisherman](https://github.com/tuna-os/fisherman) | Installer backend; handles ZFS partitioning |
-| [ubuntu-26.04-bootc](https://github.com/ubuntu-bootc/ubuntu-26.04-bootc) | Minimal base this image derives from |
-| [ubuntu-26.04-server-bootc](https://github.com/ubuntu-bootc/ubuntu-26.04-server-bootc) | Server sibling image |
+<!-- AI:start:ci -->
+_CI documentation pending._
+<!-- AI:end:ci -->
 
-## Known issues
+## Mirror chain
 
-- [#2](https://github.com/ubuntu-bootc/ubuntu-26.04-desktop-bootc/issues/2) — composefs verity regression on kernel 7.0 (`f77f281b6118`)
-- [#3](https://github.com/ubuntu-bootc/ubuntu-26.04-desktop-bootc/issues/3) — `sysroot.mount` / `systemd-gpt-auto-generator` quirk on Ubuntu 26.04
-
-## Project layout
+<!-- AI:start:mirror-chain -->
+This repo is maintained in [`Interested-Deving-1896/ubuntu-26.04-desktop-bootc`](https://github.com/Interested-Deving-1896/ubuntu-26.04-desktop-bootc) and mirrored through:
 
 ```
-Containerfile          FROM ubuntu-26.04-bootc + GNOME + ZFS + plymouth
-Justfile               build / generate-bootable-image / test-boot / boot-vm
-shared/
-  initramfs.sh         dracut with bootc + plymouth + zfs modules
-  bootc-rootfs.sh      ostree symlink forest (wipes /var — see AGENTS.md)
-  test-image.sh        structure tests run in CI
-recipe.json            fisherman recipe (ZFS or btrfs install)
+Interested-Deving-1896/ubuntu-26.04-desktop-bootc  ──►  OpenOS-Project-OSP/ubuntu-26.04-desktop-bootc  ──►  OpenOS-Project-Ecosystem-OOC/ubuntu-26.04-desktop-bootc
 ```
+
+Changes flow downstream automatically via the hourly mirror chain in
+[`fork-sync-all`](https://github.com/Interested-Deving-1896/fork-sync-all).
+Direct commits to OSP or OOC are detected and opened as PRs back to `Interested-Deving-1896`.
+<!-- AI:end:mirror-chain -->
+
+## Contributors
+
+<!-- AI:start:contributors -->
+_Contributors pending._
+<!-- AI:end:contributors -->
+
+## Origins
+
+<!-- AI:start:origins -->
+_Original project — no upstream fork._
+<!-- AI:end:origins -->
+
+## Resources
+
+<!-- AI:start:resources -->
+_No additional resource files found._
+<!-- AI:end:resources -->
+
+## License
+
+<!-- AI:start:license -->
+<!-- License not detected — add a LICENSE file to this repo. -->
+<!-- AI:end:license -->
